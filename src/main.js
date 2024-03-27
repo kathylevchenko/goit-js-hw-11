@@ -22,7 +22,7 @@ function hideLoader() {
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     const query = input.value.trim();
-    showLoader();
+   
     galleryList.innerHTML = "";
 
   
@@ -34,7 +34,7 @@ form.addEventListener("submit", (event) => {
         });
         return;
     };
-    hideLoader();
+    showLoader();
     if (query) {
         fetchImages(query)
             .then(data => renderImages(data.hits))
