@@ -8,7 +8,6 @@ import { renderImages } from "./js/render-functions.js";
 
 
 const galleryList = document.querySelector(".gallery");
-let query = input.value.trim();;
 const input = document.querySelector("input");
 const form = document.querySelector("form");
 const loader = document.querySelector('.loader');
@@ -20,23 +19,26 @@ function showLoader() {
 function hideLoader() {
     loader.classList.add("hidden");
 }
-
 form.addEventListener("submit", (event) => {
     event.preventDefault();
+    const query = input.value.trim();
     showLoader();
     galleryList.innerHTML = "";
+
+  
     if (query === "") {
         iziToast.error({
             color: 'red',
             message: ` Please fill in the field for search`,
             position: 'topRight',
         });
-    }
+        return;
+    };
+    hideLoader();
     if (query) {
         fetchImages(query)
             .then(data => renderImages(data.hits))
             .catch(error => {
-                // console.log(error);
                 iziToast.error({
                     title: 'Error',
                     message: `Sorry, there are no images matching your search query. Please, try again!`,
