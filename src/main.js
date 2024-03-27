@@ -8,7 +8,7 @@ import { renderImages } from "./js/render-functions.js";
 
 
 const galleryList = document.querySelector(".gallery");
-let query;
+let query = input.value.trim();;
 const input = document.querySelector("input");
 const form = document.querySelector("form");
 const loader = document.querySelector('.loader');
@@ -20,13 +20,6 @@ function showLoader() {
 function hideLoader() {
     loader.classList.add("hidden");
 }
-
-
-input.addEventListener("input", (event) => {
-    event.preventDefault();
-    query = input.value.trim();
-    
-});
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -43,7 +36,7 @@ form.addEventListener("submit", (event) => {
         fetchImages(query)
             .then(data => renderImages(data.hits))
             .catch(error => {
-                console.log(error);
+                // console.log(error);
                 iziToast.error({
                     title: 'Error',
                     message: `Sorry, there are no images matching your search query. Please, try again!`,
